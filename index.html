@@ -30,45 +30,49 @@ svg {
 
 <script src="main.js"></script>
 <script>
-const svg = document.querySelector("svg");
-const grid = document.querySelector("#grid");
-const paths = document.querySelector("#paths");
-const line = document.createElementNS("http://www.w3.org/2000/svg", "path");
-line.setAttributeNS(null, "stroke", "#ccc");
-line.setAttributeNS(null, "stroke-width", "0.5px");
-for (let x = 10, curr; x < 640; x += 10) {
-	curr = line.cloneNode();
-	if (x === 640 / 2) {
-		curr.setAttributeNS(null, "stroke", "#666");
+/* main variables */
+const svg = document.querySelector("svg"),
+	grid = document.querySelector("#grid"),
+	paths = document.querySelector("#paths");
+
+/* draw graph grid */
+(function(line) {
+	line.setAttributeNS(null, "stroke", "#ccc");
+	line.setAttributeNS(null, "stroke-width", "0.5px");
+	for (let x = 10, curr; x < 640; x += 10) {
+		curr = line.cloneNode();
+		if (x === 640 / 2) {
+			curr.setAttributeNS(null, "stroke", "#666");
+		}
+		curr.setAttributeNS(null, "d", `M${x} 0 v 480`);
+		grid.appendChild(curr);
 	}
-	curr.setAttributeNS(null, "d", `M${x} 0 v 480`);
-	grid.appendChild(curr);
-}
-for (let y = 10, curr; y < 480; y += 10) {
-	curr = line.cloneNode();
-	if (y === 480 / 2) {
-		curr.setAttributeNS(null, "stroke", "#666");
+	for (let y = 10, curr; y < 480; y += 10) {
+		curr = line.cloneNode();
+		if (y === 480 / 2) {
+			curr.setAttributeNS(null, "stroke", "#666");
+		}
+		curr.setAttributeNS(null, "d", `M0 ${y} H 640`);
+		grid.appendChild(curr);
 	}
-	curr.setAttributeNS(null, "d", `M0 ${y} H 640`);
-	grid.appendChild(curr);
-}
+}(document.createElementNS("http://www.w3.org/2000/svg", "path")));
 
 
 
-
-//const q = new Curve(2, 3, 1);
-//q.tracePath(0, 9, 10, -10, 640/2, 480/2)
-const line0 = new Curve(10); // y = 10
-paths.appendChild(line0.generatePath(-32, 32, 10, -10, 640/2, 480/2));
-const line1 = new Curve(-3, 2); // y = 2x - 3
-paths.appendChild(line1.generatePath(-32, 32, 10, -10, 640/2, 480/2));
-const line2 = new Curve(2, 3, 1); // y = x^2 + 3x + 2
-paths.appendChild(line2.generatePath(-32, 32, 10, -10, 640/2, 480/2));
-const line2v2 = new Curve(-5, 0, 1/10); // y = x^2 + 3x + 2
-paths.appendChild(line2v2.generatePath(-32, 32, 10, -10, 640/2, 480/2));
-const line3 = new Curve(10, -10, 0, 0.01); // y = x^2 + 3x + 2
-paths.appendChild(line3.generatePath(-32, 32, 10, -10, 640/2, 480/2));
-
+/* drawing the actual paths */
+[
+	// 0th degree
+	new Curve(10), // y = 10
+	// 1st degree
+	new Curve(-3, 2), // y = 2x - 3
+	// 2nd degree
+	new Curve(2, 3, 1), // y = x^2 + 3x + 2
+	new Curve(-5, 0, 1/10), // y = 0.1x^2 - 5
+	// 3rd degree
+	new Curve(10, -10, 0, 0.01) // y = 0.01x^3 -10x + 10
+].forEach(line => {
+	paths.appendChild(line.generatePath(-32, 32, 10, -10, 640/2, 480/2));
+});
 </script>
 
 </body>
