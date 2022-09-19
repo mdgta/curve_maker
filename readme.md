@@ -41,19 +41,19 @@ new Curve(10, -10, 0, 0.01); // represents f(x) = 0.01x^3 -10x + 10
 
 ### Static properties
 
-#### `Array.equationDegrees`
+#### `Curve.equationDegrees`
 An array representing the SVG Path command for the respective curve by its order as an index:
 
 `["H", "L", "Q", "C"]`
 
 ### Static methods
 
-#### `Array.getDegree()`
+#### `Curve.getDegree()`
 Get the degree of an equation from a class instance.
 
 ##### Syntax
 ```javascript
-Array.getDegree(curve)
+Curve.getDegree(curve)
 ```
 
 Parameters:
@@ -62,24 +62,24 @@ Parameters:
 ##### Examples
 ```javascript
 const curve_0 = new Curve(1);
-console.log(Array.getDegree(curve_0)); // 0
+console.log(Curve.getDegree(curve_0)); // 0
 
 const curve_1 = new Curve(2, 1);
-console.log(Array.getDegree(curve_1)); // 1
+console.log(Curve.getDegree(curve_1)); // 1
 
 const curve_2 = new Curve(3, 2, 1);
-console.log(Array.getDegree(curve_2)); // 2
+console.log(Curve.getDegree(curve_2)); // 2
 
 const curve_3 = new Curve(4, 3, 2, 1);
-console.log(Array.getDegree(curve_3)); // 3
+console.log(Curve.getDegree(curve_3)); // 3
 ```
 
-#### `Array.getDegreeCommand()`
+#### `Curve.getDegreeCommand()`
 Get the SVG Path command for the degree from an array of coefficients.
 
 ##### Syntax
 ```javascript
-Array.getDegreeCommand(coefficientArray)
+Curve.getDegreeCommand(coefficientArray)
 ```
 
 Parameters:
@@ -88,15 +88,15 @@ Parameters:
 ##### Examples
 ```javascript
 const curve_0 = new Curve(1);
-console.log(Array.getDegreeCommand([3, 2, 1])); // "Q"
+console.log(Curve.getDegreeCommand([3, 2, 1])); // "Q"
 ```
 
-#### `Array.isValid()`
+#### `Curve.isValid()`
 Check if an array of coefficients makes a valid constructor for a `Curve` instance.
 
 ##### Syntax
 ```javascript
-Array.isValid(coefficientArray)
+Curve.isValid(coefficientArray)
 ```
 
 Parameters:
@@ -104,9 +104,9 @@ Parameters:
 
 ##### Examples
 ```javascript
-console.log(Array.isValid([])); // false
-console.log(Array.isValid([3, 2, 1])); // true
-console.log(Array.isValid([5, 4, 3, 2, 1])); // false
+console.log(Curve.isValid([])); // false
+console.log(Curve.isValid([3, 2, 1])); // true
+console.log(Curve.isValid([5, 4, 3, 2, 1])); // false
 ```
 
 ### Instance private fields
